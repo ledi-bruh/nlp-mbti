@@ -1,0 +1,7 @@
+torch
+accelerate
+transformers[sentencepiece]
+aiogram
+python-dotenv
+pydantic-settings
+deep-translator
