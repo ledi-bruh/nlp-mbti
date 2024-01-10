@@ -1,10 +1,11 @@
 import logging
+from random import shuffle
+from collections import defaultdict
 from aiogram import Router, types
 from aiogram.filters import Command, StateFilter
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
-from random import shuffle
-from collections import defaultdict
+from aiogram.enums import ParseMode
 from deep_translator import GoogleTranslator
 
 from .questions import questions
@@ -82,14 +83,14 @@ async def start_quiz_handler(message: types.Message, state: FSMContext):
 
 @router.message(Quiz.start, Command('stop'))
 async def stop_quiz_handler(message: types.Message, state: FSMContext):
-    await message.answer('Спасибо за прохождение тестирования.')
+    await message.answer('Спасибо за прохождение тестирования 🐸')
     
     data = await state.get_data()
     mbti_result = get_softmax_for_mbti(data['mbti'])
 
     
-    result_output = '\n'.join(f'{pair[0]}:\t{pair[1]:.3%}' for pair in mbti_result)
-    await message.reply(result_output)
+    result_output = '\n'.join(f'{pair[0]}: {pair[1]:.3%}' for pair in mbti_result).replace('.', '\\.')
+    await message.answer(f'`{result_output}`', parse_mode=ParseMode.MARKDOWN_V2)
     
     await state.clear()
 
