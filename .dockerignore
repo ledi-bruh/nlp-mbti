@@ -1,0 +1,11 @@
+.git
+.vscode
+.idea
+
+**/__pycache__/
+**/.env
+**/.venv
+**/env/
+**/venv/
+
+models/
