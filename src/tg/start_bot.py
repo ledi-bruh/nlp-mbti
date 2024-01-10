@@ -1,6 +1,6 @@
 from aiogram import Bot, Dispatcher
 
-from .config import settings
+from src.config import settings
 from .router import router
 
 

@@ -1,8 +1,8 @@
 import asyncio
 import logging
 
-from .nlp import load_model
-from .tg import start_bot
+from src.nlp import load_model
+from src.tg import start_bot
 
 
 async def main():

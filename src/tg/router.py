@@ -8,8 +8,9 @@ from aiogram.fsm.context import FSMContext
 from aiogram.enums import ParseMode
 from deep_translator import GoogleTranslator
 
+from src.nlp import predict
 from .questions import questions
-from .nlp import predict, get_softmax_for_mbti
+from .functions import actualize_mbti, get_softmax_for_mbti
 
 
 __all__ = ['router']
@@ -52,11 +53,6 @@ async def collect_answer(answer: str, state: FSMContext) -> None:
         order=data['order'][1:],
         mbti=mbti,
     )
-
-
-def actualize_mbti(mbti: defaultdict, probs: list[tuple[str, float]]) -> None:
-    for mbti_type, prob in probs:
-        mbti[mbti_type] += prob
 
 
 @router.message(StateFilter(None), Command('start'))
