@@ -22,8 +22,6 @@ _translator = GoogleTranslator('ru', 'en')
 
 class Quiz(StatesGroup):
     start = State()
-    stop = State()
-    result = State()
 
 
 async def get_next(state: FSMContext) -> str | None:
@@ -79,7 +77,7 @@ async def start_quiz_handler(message: types.Message, state: FSMContext):
 
 @router.message(Quiz.start, Command('stop'))
 async def stop_quiz_handler(message: types.Message, state: FSMContext):
-    await message.answer('Спасибо за прохождение тестирования 🐸')
+    await message.answer('🐸 Спасибо за прохождение тестирования')
     
     data = await state.get_data()
     mbti_result = get_softmax_for_mbti(data['mbti'])
